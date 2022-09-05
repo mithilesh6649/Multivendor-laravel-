@@ -74,6 +74,13 @@ Route::match(['get','post'],'update-vendor-details/{slug}','AdminController@upda
   Route::get('admins/{type?}','AdminController@admins');
 
 
+ //21 :- View venodr details
+  
+  Route::get('view-vendor-details/{id}','AdminController@viewVendorDetails')->name('view.vendor.details');
+
+
+
+
   });
 
 });
