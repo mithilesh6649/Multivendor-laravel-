@@ -3,16 +3,14 @@
 
 @section('content')
   
- 
-
 <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Welcome Aamir</h3>
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                  <h3 class="font-weight-bold">Vendor Information</h3>
+                  
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
@@ -33,18 +31,56 @@
             </div>
           </div>
 
+     
+       <div class="row">
+            <div class="col-md-12">
 
-    @if($slug == "personal")
-     @include('admin.settings.partials.vendor.vendor_personal')
-      {{$slug}} 
-    @elseif($slug == "business")
-     @include('admin.settings.partials.vendor.vendor_business')
-     {{$slug}}
-    @elseif($slug == "bank")
-     @include('admin.settings.partials.vendor.vendor_bank')
-    {{$slug}}
-    @endif 
-      
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"> Personal Information</h4>
+                 
+ 
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Email</label>
+                      <input type="text" class="form-control" id="email" name="email" value="{{$vendorDetails['email']}}"   readonly>
+                    </div>
+                    
+
+                  <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" class="form-control" id="name" placeholder="name" value="{{$vendorDetails['name']}}" readonly>
+                  <div class="name mt-2">
+                   
+                 </div>
+                </div>
+
+                 
+
+                    <div class="form-group">
+                      <label for="mobile">Mobile</label>
+                      <input type="mobile" name="mobile" class="form-control" id="mobile" placeholder="mobile" value="{{$vendorDetails['mobile']}}" readonly>
+                    </div>
+
+                  
+
+              
+           
+            
+
+ 
+               
+              
+                    
+                   
+                </div>
+              </div>
+            </div>  
+              
+            </div>
+         </div>
+
+
        
         
         </div>
@@ -56,55 +92,21 @@
 
 
 
+ 
+ 
+
 @endsection
 
 
 @push('js')
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-
 <script>
  
- $('.dropify').dropify();
-
- $('.select_2_id').select2();
  
- $(document).ready(function(){
-   
-   $('#current_password').on('input',function(){
-     let current_passowrd  = $(this).val();
-
-      $.ajax({
-          type:"post",
-          url:"{{ route('admin.check.password')}}",
-          data:{
-              password :current_passowrd, 
-              "_token": "{{ csrf_token() }}",
-          },
-          beforeSend:function(){
-            $('.password_notice').html("<p class='text-danger'>Processing........</p>");
-          },
-          success:function(response){
-             if(response.trim() == true){
-                 $('.password_notice').html("<p class='text-success'>Success</p>");
-             }
-          },
-          error:function(xhr,response,error){
-        
-          }
-      });
-
-   });  
-     
- });
-
-
 
  
 

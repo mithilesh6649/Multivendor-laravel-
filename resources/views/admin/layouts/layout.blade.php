@@ -233,6 +233,11 @@
   <script src="{{ asset('admin/js/Chart.roundedBarCharts.js')}}"></script>
   <!-- End custom js for this page-->
 
+  {{-- MK Custom folder js  --}}
+  <script src="{{ asset('custom/js/script.js')}}"></script>
+  {{-- All type cdns --}}
+
+
   @stack('js')
 
 

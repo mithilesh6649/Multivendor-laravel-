@@ -75,13 +75,19 @@
                    
                  </div>
                 </div>
-
+ 
                    <div class="form-group">
                   <label for="name">Country</label>
-                  <input type="text" name="country" class="form-control" id="country" placeholder="country" value="{{$vendorDetails['country']}}">
-                  <div class="country mt-2">
-                   
-                 </div>
+                  {{-- <input type="text" name="country" class="form-control" id="country" placeholder="country" value="{{$vendorDetails['country']}}"> --}}
+                  <select class="form-control select_2_id" id="country" name="country">
+                     
+                    @forelse ($countries as $country)
+                       <option value="{{$country->country_name}}"  @if($country->country_name == $vendorDetails['country']) selected @endif>{{$country->country_name}}</option> 
+                    @empty
+                       <option disabled>Country not found !</option> 
+                    @endforelse
+                  </select>
+                 
                 </div>
                    <div class="form-group">
                   <label for="name">Pincode</label>

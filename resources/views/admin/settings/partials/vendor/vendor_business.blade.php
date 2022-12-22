@@ -76,10 +76,18 @@
 
                    <div class="form-group">
                   <label for="name">Shop Country</label>
-                  <input type="text" name="shop_country" class="form-control" id="shop_country" placeholder="country" value="{{$vendorDetails['shop_country']}}">
+                  <select class="form-control select_2_id" id="shop_country" name="shop_country">
+                     
+                    @forelse ($countries as $country)
+                       <option value="{{$country->country_name}}"  @if($country->country_name == $vendorDetails['shop_country']) selected @endif>{{$country->country_name}}</option> 
+                    @empty
+                       <option disabled>Country not found !</option> 
+                    @endforelse
+                  </select>
+                  {{-- <input type="text" name="shop_country" class="form-control" id="shop_country" placeholder="country" value="{{$vendorDetails['shop_country']}}">
                   <div class="country mt-2">
                    
-                 </div>
+                 </div> --}}
                 </div>
                   <div class="form-group">
                   <label for="shop_pincode">Shop Pincode</label>

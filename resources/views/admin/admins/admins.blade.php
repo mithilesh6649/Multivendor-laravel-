@@ -1,10 +1,5 @@
 @extends('admin.layouts.layout')
-
-
 @section('content')
-  
-
-
 
 <div class="main-panel">
         <div class="content-wrapper">
@@ -100,15 +95,20 @@
                             </td>
 
                             <td>
+                              
                               <img src="{{asset('images/admin/'.$admin['image'])}}">     
                             </td>
 
                               <td>
-                                @if($admin['status'])
-                                   <i style="font-size:25px;" class="mdi mdi-bookmark"></i> 
+                                @if($admin['status'] == 1)
+                                   <a class="updateAdminStatus" id="admin-{{$admin['id']}}" admin_id="{{$admin['id']}}" href="javascript:void(0);">
+                                   <i style="font-size:25px;" class="mdi mdi-bookmark-check" status="Active"></i>
+                                   </a> 
                                 @else 
-                                  <i style="font-size:25px;" class="mdi mdi-bookmark-outline"></i> 
-                                @endif    
+                                <a class="updateAdminStatus" id="admin-{{$admin['id']}}" admin_id="{{$admin['id']}}" href="javascript:void(0);">
+                                  <i style="font-size:25px;" class="mdi mdi-bookmark-outline" status="Inactive"></i> 
+                                </a>
+                                 @endif    
                                   
                             </td>
 
@@ -160,41 +160,38 @@
 <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 
 <script>
+//Update Admin Details
  
- $('.dropify').dropify();
- 
- $(document).ready(function(){
-   
-   $('#current_password').on('input',function(){
-     let current_passowrd  = $(this).val();
-
-      $.ajax({
-          type:"post",
-          url:"{{ route('admin.check.password')}}",
-          data:{
-              password :current_passowrd, 
-              "_token": "{{ csrf_token() }}",
-          },
-          beforeSend:function(){
-            $('.password_notice').html("<p class='text-danger'>Processing........</p>");
-          },
-          success:function(response){
-             if(response.trim() == true){
-                 $('.password_notice').html("<p class='text-success'>Success</p>");
-             }
-          },
-          error:function(xhr,response,error){
-        
-          }
-      });
-
-   });  
+$(document).ready(function(){ 
+  
+  $(document).on('click','.updateAdminStatus',function(){
+     var status = $(this).children("i").attr("status");
+     var admin_id = $(this).attr('admin_id');
+    //  console.log(admin_id);
      
- });
+    $.ajax({
+        type:"post",
+        url:"{{route('update.admin.status')}}",
+        data:{ "_token": "{{ csrf_token() }}",status:status,admin_id:admin_id},
+        beforeSend:function(){
+         // alert('Before Send'); 
+        },
+        success:function(response){
+          // console.log(response);
+          if(response.status == 0){
+           $('#admin-'+admin_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+          }else{
+            $('#admin-'+admin_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+          }
+        },
+        error:function(xhr,error,response){
+           // alert('error')+
+        } 
+    });
+    
+  });
 
-
-
- 
+});
 
 </script>
 
