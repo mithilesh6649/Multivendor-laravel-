@@ -69,12 +69,75 @@ error_reporting(0);
                   {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
                 @endif
                  
-                  <form class="forms-sample" @if(empty($section['id']))  action="{{url('admin/add-edit-section')}}"  @else action="{{url('admin/add-edit-section/'.$section['id'])}}" @endif  method="post" >
+                  <form class="forms-sample" @if(empty($category['id']))  action="{{url('admin/add-edit-category')}}"  @else action="{{url('admin/add-edit-category/'.$category['id'])}}" @endif  method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                      <label for="exampleInputUsername1">Admin Username/Email</label>
+                      <label for="exampleInputUsername1">Category Name </label>
                      
-                      <input type="text" class="form-control" id="section_name"   placeholder="Enter Section Name" name="section_name" @if(!empty($section['name'])) value="{{$section['name']}}" @else value="{{old('section_name')}}" @endif >
+                      <input type="text" class="form-control" id="category_name"   placeholder="Enter category Name" name="category_name" @if(!empty($category['category_name'])) value="{{$category['category_name']}}" @else value="{{old('category_name')}}" @endif >
+                    </div>
+
+
+                     <div class="form-group">
+                      <label for="exampleInputUsername1">Select Section</label>
+                     
+                      <select name="section_id" id="section_id" class="form-control">
+                        <option>Select</option>
+                        @foreach($getSections as $section)
+                         <option @if(!empty($category['section_id']) && $category['section_id'] == $section['id'] ) selected @endif value="{{$section['id']}}">{{$section['name']}}</option>
+                        @endforeach
+                        
+                      </select>
+                    </div>
+
+               
+
+                    <div id="appendCategoriesLevel">
+                      @include('admin.categories.append_categories_level')
+                    </div>
+
+                     <div class="form-group">
+                      <label for="exampleInputUsername1">Category Image </label>
+                     
+                      <input type="file" class="form-control" id="category_image" name="category_image">
+                    </div>
+ 
+
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Category Discount </label>
+                     
+                      <input type="text" class="form-control" id="category_discount"   placeholder="Enter category Name" name="category_discount" @if(!empty($category['category_discount'])) value="{{$category['category_discount']}}" @else value="{{old('category_discount')}}" @endif >
+                    </div>
+
+                     <div class="form-group">
+                      <label for="exampleInputUsername1">Category Description </label>
+                     <textarea name="description"></textarea>
+                    
+                    </div>
+
+
+                     <div class="form-group">
+                      <label for="exampleInputUsername1">URL</label>
+                     
+                      <input type="text" class="form-control" id="url"   placeholder="Enter URL" name="url" @if(!empty($category['url'])) value="{{$category['url']}}" @else value="{{old('url')}}" @endif >
+                    </div>
+
+                        <div class="form-group">
+                      <label for="exampleInputUsername1">Meta Title</label>
+                     
+                      <input type="text" class="form-control" id="meta_title"   placeholder="Enter meta_title" name="meta_title" @if(!empty($category['meta_title'])) value="{{$category['meta_title']}}" @else value="{{old('meta_title')}}" @endif >
+                    </div>
+
+                       <div class="form-group">
+                      <label for="exampleInputUsername1">Meta Description</label>
+                     
+                      <input type="text" class="form-control" id="meta_description"   placeholder="Enter meta_description" name="meta_description" @if(!empty($category['meta_description'])) value="{{$category['meta_description']}}" @else value="{{old('meta_description')}}" @endif >
+                    </div>
+
+                        <div class="form-group">
+                      <label for="exampleInputUsername1">Meta Keywords</label>
+                     
+                      <input type="text" class="form-control" id="meta_keywords"   placeholder="Enter meta_keywords" name="meta_keywords" @if(!empty($category['meta_keywords'])) value="{{$category['meta_keywords']}}" @else value="{{old('meta_keywords')}}" @endif >
                     </div>
                      
 
@@ -137,7 +200,29 @@ error_reporting(0);
  });
 
 
+ //Append categories level
 
+ $(document).ready(function(){
+    $('#section_id').on('change',function(){
+        var section_id = $(this).val();
+         // alert(section_id);
+         $.ajax({
+            type:"post",
+            url:"/admin/append-categories-level",
+            data:{
+              section_id:section_id,
+               "_token": "{{ csrf_token()}}"
+            },
+            success:function(response){
+             // alert(response);
+              $('#appendCategoriesLevel').html(response);
+            },
+            error:function(){
+              alert('Error');
+            }
+         });
+    });
+ });
  
 
 </script>

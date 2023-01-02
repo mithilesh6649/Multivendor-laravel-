@@ -37,7 +37,7 @@ require __DIR__ . '/auth.php';
 Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
 
 //Admin Login Route
-    Route::match(['get', 'post'], 'login', 'AdminController@login')->name('admin.login');
+Route::match(['get', 'post'], 'login', 'AdminController@login')->name('admin.login');
 
     Route::group(['middleware' => ['admin']], function () {
 
@@ -65,7 +65,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
         //21 :- View venodr details
 
-        Route::get('view-vendor-details/{id}', 'AdminController@viewVendorDetails')->name('view.vendor.details');
+        
+    Route::get('view-vendor-details/{id}', 'AdminController@viewVendorDetails')->name('view.vendor.details');
 
         // 22 :- Update admin status
 
@@ -81,9 +82,13 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
         // Category Coding Start
         Route::get('categories', 'CategoryController@categories');
+        
         Route::post('update-category-status', 'CategoryController@updatedCategoryStatus')->name('update.category.status');
+        
         Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory');
-
+       
+        Route::post('append-categories-level', 'CategoryController@appendCategoryLevel');
+        
     });
 
 });
