@@ -102,8 +102,18 @@
                
                @if(Session::get('page') == "categories") style='background:#4B49AC !important;color:#fff;' @else style='background:#ffffff !important;color:#4B49AC;'  @endif
                class="nav-link" href="{{url('admin/categories')}}">Categories</a></li>
-              <li  
+
+
+                  <li 
+           
                class="nav-item"> <a 
+               
+               @if(Session::get('page') == "brands") style='background:#4B49AC !important;color:#fff;' @else style='background:#ffffff !important;color:#4B49AC;'  @endif
+               class="nav-link" href="{{url('admin/brands')}}">Brands</a></li>
+
+              
+
+              <li class="nav-item"> <a 
                
                @if(Session::get('page') == "products") style='background:#4B49AC !important;color:#fff;' @else style='background:#ffffff !important;color:#4B49AC;'  @endif
                

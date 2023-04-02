@@ -76,6 +76,7 @@ Route::match(['get', 'post'], 'login', 'AdminController@login')->name('admin.log
 
         Route::get('sections', 'SectionController@sections');
         Route::post('update-section-status', 'SectionController@updatedSectionStatus')->name('update.section.status');
+
         Route::get('delete-section/{id}', 'SectionController@deletesection');
 
         Route::match(['get', 'post'], 'add-edit-section/{id?}', 'SectionController@addEditSection');
@@ -88,6 +89,33 @@ Route::match(['get', 'post'], 'login', 'AdminController@login')->name('admin.log
         Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory');
        
         Route::post('append-categories-level', 'CategoryController@appendCategoryLevel');
+
+         Route::get('brands', 'BrandController@brands');
+         Route::post('update-brand-status', 'SectionController@updatedSectionStatus')->name('update.brand.status');
+
+         //Product Section started.......ProductController
+   
+
+
+        Route::get('products', 'ProductController@products');
+        Route::post('update-products-status', 'ProductController@updatedProductsStatus')->name('update.products.status');
+
+        Route::get('delete-product/{id}', 'ProductController@deleteproducts');
+
+        Route::match(['get','post'],'add-edit-product/{id?}', 'ProductController@addEditProduct');
+        Route::get('delete-product-image/{id}', 'ProductController@deleteProductImage');
+        Route::get('delete-product-video/{id}', 'ProductController@deleteProductvideo');
+
+        //Attributes.........
+
+        Route::match(['get','post'],'add-edit-attributes/{id}','ProductController@addAttributes');
+
+         Route::post('update-attribute-status', 'ProductController@updatedAttributeStatus')->name('update.attribute.status');
+         Route::get('delete-attribute/{id}', 'ProductController@deleteAttribute');
+         Route::post('edit-attributes/{id}','ProductController@editAttributes');
+
+           Route::match(['get','post'],'add-images/{id}','ProductController@addImages');
+
         
     });
 
