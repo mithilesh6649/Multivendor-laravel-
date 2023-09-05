@@ -141,7 +141,7 @@
 
                             <a title="Add Attributes" href="{{url('admin/add-edit-attributes/'.$product['id'])}}"><i style="font-size:25px;" class="mdi mdi-plus-box"></i> </a>
 
-                             <a title="Add   Images" href="{{url('admin/add-images/'.$product['id'])}}"><i style="font-size:25px;" class="mdi mdi-library-plus"></i> </a>
+                             <a title="Add   Images" href="{{url('admin/add-edit-images/'.$product['id'])}}"><i style="font-size:25px;" class="mdi mdi-library-plus"></i> </a>
 
                             <a  title="Delete Products" title="product" class="confirmDelete" href="{{url('admin/delete-product/'.$product['id'])}}"><i style="font-size:25px;" class="mdi mdi-file-excel-box"></i> </a>
 

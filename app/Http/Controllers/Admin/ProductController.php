@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\ProductsAttribute;
+use App\Models\ProductsImage;
 use Illuminate\Http\Request;
 use Session,Auth;
 use Image;
@@ -112,7 +113,7 @@ class ProductController extends Controller
                     $video_tmp->move($videoPath,$videoName);
                     //Insert video name in product table...
                     $product->product_video = $videoName; 
-                     
+                        
                 } 
             }
 
@@ -126,11 +127,22 @@ class ProductController extends Controller
             $adminType = Auth::guard('admin')->user()->type;
             $vendor_id = Auth::guard('admin')->user()->vendor_id;
             $admin_id = Auth::guard('admin')->user()->id;
+
             if($adminType=='vendor'){
                 $product->vendor_id = $vendor_id;
             }else{
                 $product->vendor_id = 0;
-            }          
+            }
+            
+            if(empty($data['product_discount'])){
+                $data['product_discount'] = 0;
+            }
+
+            if(empty($data['product_weight'])){
+                $data['product_weight'] = 0;
+            }
+
+
             $product->admin_id = $admin_id; 
             $product->admin_type = $adminType;
             $product->product_name = $data['product_name'];
@@ -284,11 +296,44 @@ class ProductController extends Controller
             return redirect()->back()->with('success_message',$message);
 
           }
-          
+           
     }
 
-    public function addImages($id){
+    public function addImages(Request $request ,$id){
           $product =  Product::select(['id','product_name','product_code','product_color','product_price','product_image'])->with('images')->find($id)->toArray();
+             
+         if($request->isMethod('post')){
+           if($request->hasFile('images')){
+             //dd($request->file('images'));
+                $images  =  $request->file('images');
+             foreach ($images as $key => $image) {
+                 //Get
+                      $image_tmp = Image::make($image);
+                      $image_name = $image->getClientOriginalName();
+                     //dd($image_name);
+                      $extension = $image->getClientOriginalExtension();
+                            //Generate New Image Name
+                      $imageName = $image_name.rand(11, 99999) . '.' . $extension;
+                      $largeImagePath = 'front/images/product_images/large/'.$imageName;
+                      $mediumImagePath = 'front/images/product_images/medium/'.$imageName;
+                      $smallImagePath = 'front/images/product_images/small/'.$imageName; 
+                       
+
+                      Image::make($image_tmp)->resize(1000,1000)->save($largeImagePath);
+                      Image::make($image_tmp)->resize(500,500)->save($mediumImagePath);
+                      Image::make($image_tmp)->resize(250,250)->save($smallImagePath);
+                       //insert Image name in product table...
+                      $image = new ProductsImage();
+                      $image->image = $imageName;  
+                      $image->product_id  =  $id;
+                      $image->status = 1;
+                      $image->save();
+
+
+             }
+           }
+         }
+
             return view('admin.images.add_edit_images')->with(compact( 'product'));
 
       

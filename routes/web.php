@@ -114,7 +114,7 @@ Route::match(['get', 'post'], 'login', 'AdminController@login')->name('admin.log
          Route::get('delete-attribute/{id}', 'ProductController@deleteAttribute');
          Route::post('edit-attributes/{id}','ProductController@editAttributes');
 
-           Route::match(['get','post'],'add-images/{id}','ProductController@addImages');
+           Route::match(['get','post'],'add-edit-images/{id}','ProductController@addImages');
 
         
     });

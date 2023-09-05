@@ -1,0 +1,66 @@
+Routing
+Controllers
+Models
+Views
+Middleware
+Database Migrations and Seeders
+Eloquent Relationships
+Validation
+Authentication and Authorization
+Form Handling
+RESTful API Development
+Queues
+Events and Listeners
+Testing
+Localization
+Caching
+Error Handling and Logging
+Security Best Practices
+File Uploads
+Task Scheduling
+Eloquent Scopes
+Notifications
+Event Broadcasting
+CORS (Cross-Origin Resource Sharing)
+Laravel Mix
+Socialite
+Task Queues and Workers
+API Authentication
+Policy-based Authorization
+Pagination
+Resource Controllers
+Service Container
+Traits
+Artisan Console Commands
+Database Transactions
+Testing Factories
+Package Development
+Composer
+Session and Cache Drivers
+Eager Loading
+Form Requests
+Laravel Dusk
+Package Discovery
+Service Providers
+Dependency Injection
+Contracts
+Repositories
+Facades
+Event Handling
+Caching and Cache Tags
+Logging
+Task Workers
+API Resources
+Policies and Gates
+Session Management
+Middleware Groups
+Error Handling
+Localization and Internationalization
+Macroable Traits
+HTTP Client
+Environment Configuration
+Database Query Logging
+Custom Validation Rules
+Eloquent Mutators and Accessors
+API Versioning
+Composer Scripts

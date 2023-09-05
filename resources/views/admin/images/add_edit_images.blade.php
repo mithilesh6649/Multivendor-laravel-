@@ -66,7 +66,7 @@
                                 @endif
 
                                 <form class="forms-sample"
-                                      action="{{ url('admin/add-edit-attributes/' . $product['id']) }}" 
+                                      action="{{ url('admin/add-edit-images/' . $product['id']) }}" 
                                     method="post" enctype="multipart/form-data">
                                     @csrf
 
@@ -130,7 +130,7 @@
                     <!--  -->
                      
             <div class="table-responsive pt-3">
-                 <form method="post" action="{{url('admin/edit-attributes/'.$product['id'])}}">
+                  
                         @csrf 
                 <table class="table table-bordered"  id="category_table">
                     <thead>
@@ -163,18 +163,18 @@
                               {{ $image['id']}}
                             </td>
                             <td>
-                               <img style="width: 120px;" src="{{ url('front/images/product_images/small/' . $product['image']) }}">
+                               <img style="width: 120px;" src="{{ url('front/images/product_images/small/' . $image['image']) }}">
                             </td>
 
                              
 
                               <td>
-                                @if($attribute['status'] == 1)
-                                   <a class="updateAttributeStatus" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0);">
+                                @if($image['status'] == 1)
+                                   <a class="updateImageStatus" id="image-{{$image['id']}}" image_id="{{$image['id']}}" href="javascript:void(0);">
                                    <i style="font-size:25px;" class="mdi mdi-bookmark-check" status="Active"></i>
                                    </a>
                                 @else
-                                <a class="updateAttributeStatus" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0);">
+                                <a class="updateImageStatus" id="image-{{$image['id']}}" image_id="{{$image['id']}}" href="javascript:void(0);">
                                   <i style="font-size:25px;" class="mdi mdi-bookmark-outline" status="Inactive"></i>
                                 </a>
                                  @endif
@@ -191,8 +191,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                  <button type="submit" class="btn btn-primary">Update Attributes</button>
-                 </form>
+                  
+                  
             </div>  
                     <!--  -->
 
